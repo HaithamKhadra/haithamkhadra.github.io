@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/015dd3b660.js" crossorigin="anonymous"></script>    <link rel="stylesheet" href="styles.css">
+    <title>My Portfolio</title>
+</head>
+<body id="body">
+
+    <section class="menu-wrap">
+        <input type="checkbox" id="check" class="toggler">
+        <div class="hamburger"><div></div></div>
+        <div class="menu">
+            <div>
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#welcome-section">home</a></li>
+                        <!-- <li><a class="nav-link" href="#about">About</a></li> -->
+                        <li><a class="nav-link" href="#projects">Projects</a></li>
+                        <li><a class="nav-link" href="#skills">Skills</a></li>
+                        <li><a class="nav-link" href="#Contacts">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>        
+    </section>
+
+    <section id="welcome-section">
+        <div class="container wlcm-inner">
+            <h1>hi. I'm haitham</h1>
+            <h2>Front-end Web Developer</h2>
+        </div>
+    </section>
+
+    <!-- <sectionn id="about">
+        <div>Hello. I'm Haitham Khadra, and welcome to my personal portfolio.</div>
+        <div>I began my coding journey in the summer of 2020, going through many online courses such as <a href="https://cs50.harvard.edu/college/2021/spring/" target="_blank">Harvards' CS50</a>.
+            Then I signed up for <a href="https://www.freecodecamp.com/" target="_blank">FreeCodeCamp</a>. 
+        </div>
+    </section> -->
+
+    <section id="projects">
+        <div>
+            <h2 class="title">Projects</h2>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="flex-grid-container grid-for-projects">
+            <div class="projectItem">
+                <a href="https://codepen.io/haithamkhadra/pen/rNMRYaY"><img src="pics/tributePage.jpg" alt="screenshot of the Tribute page"></a>
+                <p class="project-title"><span>&lt;</span>Tribute Page<span>/&gt;</span></p>
+            </div>
+            <div class="projectItem">
+                <a href="https://codepen.io/haithamkhadra/pen/KKgYdVg"><img src="pics/formTemplate.jpg" alt="Form template"></a>
+                <p class="project-title"><span>&lt;</span>Form Template<span>/&gt;</span></p>
+            </div>
+            <div class="projectItem">
+                <a href="https://codepen.io/haithamkhadra/pen/zYoxjor"><img src="pics/productLandingPage.jpg" alt="product landing page"></a>
+                <p class="project-title"><span>&lt;</span>Product Landing Page<span>/&gt;</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="title-container">
+            <h2 class="title">skills</h2>
+            <div class="divider-line"></div>
+        </div>
+        <div class="flex-grid-container">
+            <div class="skill-items">
+                <img class="skills-img" src="pics/html5.png" alt="png of HTML5">
+            </div>
+            <div class="skill-items">
+                <img class="skills-img" src="pics/css.png" alt="png of CSS3">
+            </div>
+            <div class="skill-items">
+                <img class="skills-img" src="pics/js.png" alt="png of JavaScript">
+            </div>
+            <div class="skill-items">
+                <img class="skills-img" src="pics/python.png" alt="png of Python">
+            </div>
+            <div class="skill-items">
+                <img class="skills-img" src="pics/git.png" alt="png of git">
+            </div>
+            <div class="skill-items">
+                <img class="skills-img" src="pics/bootstrap.png" alt="png of bootstrap">
+            </div>
+        </div>
+    </section>
+
+    <section id="Contacts">
+        <div class="contact-head">
+            <h1 class="title">Let's get in touch!</h1>
+            <div class="divider-line-contact"></div>
+            <small>Find me on:</small>
+        </div>
+        <div class="contact-links">
+            <a href="https://codepen.io/haithamkhadra" class="btn contactitem" target="_blank"><i class="fab fa-codepen"></i></a>
+            <a href="https://www.freecodecamp.org/hkhadra" class="btn contactitem" target="_blank"><i class="fab fa-free-code-camp"></i></a>
+            <a id="profile-link" href="https://github.com/HaithamKhadra" class="btn contactitem" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/__HKhadra__" class="btn contactitem" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:haithamkhadra@hotmail.com" class="btn contactitem" target="_blank"><i class="fas fa-at"></i></a>
+        </div>
+    </section>
+
+    <footer id="copyright">
+        <small>&#169; 2021 by Haitham Khadra</small>
+    </footer>
+
+    <script src="jscript.js"></script>
+</body>
+</html>

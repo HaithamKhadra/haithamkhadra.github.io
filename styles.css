@@ -1,0 +1,646 @@
+/* User Story #9: My portfolio should have at least one media query. */
+
+
+/* setting some variables under the :root scope  */
+:root {
+    --primary-color: rgba(33, 48, 81, 0.8);
+    --menu-speed: 0.75s;
+    /* the dark color when the menu open (also transparent) */
+    --overlay-color: rgba(33, 48, 81, 0.9);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 3rem;
+}
+
+#welcome-section {
+    background-color: var(--primary-color);
+    color: rgb(203, 224, 185);
+    height: 100vh;
+    position: relative; /* relative because the overlay menu is going
+    to be positioned absolute inside of it (or should I say before it) */
+}
+
+/* to add the overlay we add a pseudo-selector which creates a ghost element
+that you can style */
+#welcome-section:before {
+    content: '';
+    background: url('pics/Portfolio-Wallpaper.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#welcome-section .wlcm-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* till now the text is not centered inside this 
+    section but when we add height 100% it'll be centered */
+    height: 100%;
+}
+
+#welcome-section .wlcm-inner > h1 {
+    text-transform: uppercase;
+    font-size: 2.75rem;
+    margin-top: 100px;
+    display: inline-block;
+    border-bottom: 3px solid #82aba5;
+    padding-bottom: 15px;
+}
+
+#welcome-section .wlcm-inner > h2 {
+    font-size: 1.3rem;
+    margin-top: 25px;    
+    text-transform: uppercase;
+}
+
+/* STYLING THE HAMBURGER MENU */
+.menu-wrap {
+    position: fixed; /* So that its fixed at the top when scrolling */
+    top: 0;
+    left: 0;
+    z-index: 1; /* To make sure its on top*/
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-content: flex-end;
+    justify-self: flex-end;
+}
+
+.menu-wrap .toggler {
+    z-index: 2;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    margin-left: 44%;
+    margin-top: 3%;
+    opacity: 0; /* to hide the checkbox */
+}
+
+.menu-wrap .hamburger { 
+    /* this is the box that is gonna hold the lines inside it */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 60px;
+    padding: 2rem;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ /* Hamburger lines */
+ .menu-wrap .hamburger > div {
+    /* this'll create the center line */
+    position: relative;
+    width: 8%;
+    height: 2px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease; /* transition on All properties  */
+ }
+
+ .menu-wrap .hamburger > div:before,
+ .menu-wrap .hamburger > div:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    background: inherit;
+ }
+
+ .menu-wrap .hamburger > div:after {
+    top: 10px;
+}
+
+/* its a checkbox so when clicked I can style it with css*/
+/* Toggler animation */
+.menu-wrap .toggler:checked + .hamburger > div { /* wht '+' cuz we want to 
+    style the div inside the checkbox */
+    transform: rotate(135deg);
+}
+
+/* turn lines into X  */
+.menu-wrap .toggler:checked + .hamburger > div::before,
+.menu-wrap .toggler:checked + .hamburger > div::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+
+/* rotate on hover when checked */
+.menu-wrap .toggler:checked:hover + .hamburger > div {
+    transform: rotate(225deg);
+}
+
+.menu-wrap .toggler:checked ~ .menu {
+    visibility: visible; /* cuz visi was hidden */
+}
+
+.menu-wrap .toggler:checked ~ .menu > div {
+    transform: scale(1);
+    transition-duration: var(--menu-speed);
+}
+
+.menu-wrap .toggler:checked ~ .menu > div > #navbar {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.menu-wrap .menu {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.menu > div {
+    background-color: var(--overlay-color);
+    width: 200vw;
+    height: 200vh; /* so that it goes outside of the screen */
+    border-radius: 50%;
+    display: flex;
+    flex: none; /* so that it does not give us the oval look */
+    align-items: center;
+    justify-content: center;
+    transform: scale(0); /* initially to 0 but when clicked it is 1 */
+    transition: all 0.4s ease;
+}
+
+#navbar {
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#navbar > ul > li {
+    list-style: none;
+    color: #adcfb4;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    padding: 1.5rem;
+}
+
+#navbar > ul > li a {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    position: relative;
+}
+
+#navbar > ul > li a:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #82aba5;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+#navbar > ul > li a:hover:after { 
+    width: 100%; 
+    left: 0; 
+}
+
+.nav-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.4s ease;
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+    color: #cbe0b9;
+    ;
+}
+
+.divider-line {
+    background-color: #658d97;
+    width: 50vw;
+    height: 5px;
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+/* STYLING THE PROJECTS SECTION */
+#projects {
+    background-color: #4f658a;
+    padding: 55px 0px;
+}
+
+.projectItem {
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+
+.projectItem  img {
+    width: 300px;
+    max-height: 100%;
+}
+
+.projectItem a {
+    display: flex;
+    justify-content: center;
+}
+
+.project-title {
+    background-color: #d6e7da;
+    width: 300px;
+    margin: 0 auto;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #213051;
+    cursor: pointer;
+}
+
+.project-title span {
+    visibility: hidden;
+    color: #d6e7da;
+    font-weight: bold;
+}
+
+.project-title:hover span, 
+.project-title:focus span {
+    visibility: visible;
+    color: rgb(255, 0, 0);
+    transition: color 1.5s ease-in;
+}
+/* END OF THE PROJECTS SECTION STYLING */
+
+/* STYLING THE SKILLS SECTION */
+#skills {
+    background-color: #3b4a73;
+    padding: 55px 0px;
+}
+
+.flex-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-items {
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+.skill-items:nth-child(1) {
+    background-color: #f16529;
+}
+
+.skill-items:nth-child(2) {
+    background-color: #3c9cd7;
+}
+
+.skill-items:nth-child(3) {
+    background-color: #f1d015;
+}
+
+.skill-items:nth-child(4) {
+    background-color: #ececec;
+}
+
+.skill-items:nth-child(5) {
+    background-color: #3A3042;
+}
+
+.skill-items:nth-child(6) {
+    background-color: #FFD23F;
+}
+
+@keyframes skill-item {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    25% {
+        transform: translate(1px, 1px) rotate(5deg);
+    }
+    50% {
+        transform: translate(1px, 1px) rotate(-5deg);
+    }
+    75% {
+        transform: translate(1px, 1px) rotate(5deg);
+    }
+    100% {
+        transform: translate(1px, 1px) rotate(-5deg);
+    }
+}
+  
+.skills-img:hover {
+    cursor: auto;
+    animation: skill-item 1s infinite;
+}
+
+.skills-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+/* END OF SKILLS SECTION STYLING */
+
+/* START OF SKILLS SECTION STYLING */
+#Contacts {
+    background-color: #4f658a;
+    padding: 55px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.contact-head {
+    max-width: 100%;
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+    color: #cbe0b9;
+    width: 100%;
+}
+
+.divider-line-contact {
+    background-color: #658d97;
+    width: 250px;
+    height: 5px;
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+#Contacts small {
+    display: block;
+    color: #000000;
+    text-align: center;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.contact-links {
+    display: grid;
+    grid-column-gap: 30px;
+    grid-template-columns: repeat(auto-fill, 75px 75px 75px);
+    justify-items: center;
+    text-decoration: none;
+}
+
+.btn:nth-child(4),
+.btn:nth-child(5) {
+    margin-left: 110px;
+}
+
+.contactitem {
+    margin-top: 30px;
+}
+
+.fab, .fas {
+    font-size: 40px;
+    width: 55px;
+    height: 55px;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 25%;
+}
+
+.fab:hover, .fas:hover, 
+.fab:focus, .fas:focus {
+    transform: translateY(-5px);
+    border-radius: 50%;
+    transition: border-radius 0.5s ease;
+}
+
+.fa-codepen {
+    color: #fff;
+    background-color: #000;
+}
+
+.fa-free-code-camp {
+    color: #fff;
+    background-color: #006100;
+}
+
+.fa-github {
+    color: #000;
+    background-color: #fff;
+}
+
+.fa-twitter {
+    color:#fff;
+    background-color: #0074c7;
+}
+
+.fa-at {
+    color: #f00;
+    background-color: #fff;
+}
+/* END OF CONTACT SECTION STYLING */
+
+#copyright small {
+    padding: 20px 5px 20px;
+    display: block;
+    text-align: end;
+    background-color: rgba(33, 48, 81);
+    color: #88a3aa;
+    border-top: 4px solid #d6e7da;
+}
+
+@media screen and (max-height: 420px) {
+    #navbar > ul > li {
+        padding: 0.7rem;
+    }
+
+    .menu-wrap .toggler {
+        width: 60px;
+        height: 50px;
+        margin-left: 45%;
+        margin-top: 1%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .menu-wrap .toggler {
+        width: 70px;
+        height: 50px;
+        margin-left: 45%;
+        margin-top: 1%;
+    }
+
+    .flex-grid-container {
+        display: grid;
+        grid-column-gap: 30px;
+        grid-template-columns: repeat(auto-fill, 200px 200px 200px);
+        justify-items: center;
+    }
+
+    .skill-items {
+        width: 175px;
+        height: 175px;
+        margin: 10px;
+    }
+
+    .grid-for-projects{
+        display: grid;
+        grid-column-gap: 30px;
+        grid-template-columns: repeat(auto-fill, 350px 350px);
+        justify-items: center;
+    }
+
+    .projectItem:nth-child(3) {
+        margin-left: 400px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .menu-wrap {
+        position: fixed; /* So that its fixed at the top when scrolling */
+        top: 0;
+        left: 0;
+        z-index: 1; /* To make sure its on top*/
+        width: 100%;
+        height: 10%;
+        display: flex;
+        align-content: flex-end;
+        justify-self: flex-end;
+    }
+
+    .menu-wrap .toggler {
+        display: none;
+    }
+
+    .menu-wrap .hamburger { 
+        /* this is the box that is gonna hold the lines inside it */
+        display: none;
+    }
+
+    .menu-wrap .menu {
+        position: relative;
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        flex-direction: column;
+        visibility: visible;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .menu > div {
+        background-color: var(--primary-color);
+        width: 100vw;
+        height: 100%; 
+        border-radius: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        transform: scale(1); /* initially to 0 but when clicked it is 1 */
+        transition: none;
+    }
+
+    #navbar {
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 1;
+        transition: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    #navbar > ul > li {
+        display: inline-flex;
+        justify-content: flex-end;
+        list-style: none;
+        color: #adcfb4;
+        font-size: 1rem;
+        font-weight: bolder;
+        padding: 25px;
+    }
+
+    #navbar > ul > li a {
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        position: sticky !important;
+    }
+
+    #navbar > ul > li a:after {    
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: #82aba5;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+    }
+
+    #navbar > ul > li a:hover:after { 
+        width: 100%; 
+        left: 0; 
+    }
+
+    .nav-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.4s ease;
+    }    
+}
